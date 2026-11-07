@@ -21,15 +21,31 @@ import '../categories/self_improvement_category_screen.dart';
 import '../auth/splash_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final int initialIndex;
+
+  const HomeScreen({super.key, this.initialIndex = 0});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentBottomIndex = 0;
+  late int _currentBottomIndex;
   static const Color primaryColor = Color(0xFF800E13);
+
+  @override
+  void initState() {
+    super.initState();
+    _currentBottomIndex = widget.initialIndex;
+  }
+
+  @override
+  void didUpdateWidget(covariant HomeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialIndex != widget.initialIndex) {
+      _currentBottomIndex = widget.initialIndex;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

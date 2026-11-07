@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/course_model.dart';
+import 'widgets/cart_success_bottom_sheet.dart';
+import '../main/home_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   final CourseModel course;
@@ -138,6 +140,8 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           ],
         ),
       ),
+      // Bottom Navigation Bar Terintegrasi
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -278,14 +282,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             height: 44,
             child: OutlinedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      '${widget.course.title} ditambahkan ke keranjang.',
-                      style: const TextStyle(fontFamily: 'Poppins'),
-                    ),
-                  ),
-                );
+                CartSuccessBottomSheet.show(context);
               },
               style: OutlinedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -596,6 +593,97 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           ),
         ),
       ],
+    );
+  }
+  // --- Bottom Navigation Bar ---
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(color: Colors.grey.shade200, width: 1),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.03),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: (index) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (_) => HomeScreen(initialIndex: index),
+            ),
+            (route) => false,
+          );
+        },
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: primaryColor,
+        unselectedItemColor: Colors.black87,
+        selectedLabelStyle: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          fontFamily: 'Poppins',
+        ),
+        unselectedLabelStyle: const TextStyle(
+          fontSize: 11,
+          fontFamily: 'Poppins',
+        ),
+        elevation: 0,
+        items: [
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/images/nav_home.png',
+              width: 22,
+              height: 22,
+              color: primaryColor,
+            ),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/images/nav_search.png',
+              width: 22,
+              height: 22,
+              color: Colors.black87,
+            ),
+            label: 'Cari',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/images/nav_course.png',
+              width: 22,
+              height: 22,
+              color: Colors.black87,
+            ),
+            label: 'Kursus',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/images/nav_cart.png',
+              width: 22,
+              height: 22,
+              color: Colors.black87,
+            ),
+            label: 'Pembelian',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/images/nav_profile.png',
+              width: 22,
+              height: 22,
+              color: Colors.black87,
+            ),
+            label: 'Akun',
+          ),
+        ],
+      ),
     );
   }
 }
