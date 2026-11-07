@@ -134,17 +134,31 @@ final List<CourseModel> allCourses = [
     id: 'adobe_illustrator',
     title: 'Belajar Adobe Ilustrator Dari Nol',
     category: 'Industri Kreatif',
-    tagline: 'Mahir membuat desain vektor, logo, dan ilustrasi digital profesional.',
+    tagline: 'Mempelajari dasar Adobe Illustrator untuk membuat desain grafis dan ilustrasi digital.',
     instructor: 'Channel Ruang Belajar',
-    price: 32000,
+    price: 120000,
     rating: 4.0,
-    thumbnailAsset: 'assets/images/thumb_illustrator.png',
+    thumbnailAsset: 'assets/images/banner_adobe_illustrator.png',
     whatYouWillLearn: [
-      'Penguasaan Pen Tool & Shape Builder',
-      'Teknik Pewarnaan Vektor & Tipografi',
+      'Ai Hingga Bisa',
+      'Belajar Ai',
+      'Belajar Adobe  Dasar',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Panduan langkah demi langkah membuat ilustrasi digital dan desain grafis berbasis vektor menggunakan Adobe Illustrator.',
+        'Kuasai keterampilan desain grafis dan ilustrasi digital melalui kelas Belajar Adobe Illustrator Dari Nol. Kursus ini dirancang khusus untuk membimbing pemula dalam memahami penggunaan perangkat lunak Adobe Illustrator secara terstruktur, mulai dari pengenalan alat-alat dasar hingga pembuatan karya visual yang profesional.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
 
   // --- PENGEMBANGAN (DEVELOPMENT) ---
@@ -200,17 +214,31 @@ final List<CourseModel> allCourses = [
     id: 'kalistenik_pemula',
     title: 'Kalistenik Untuk Pemula',
     category: 'Gaya Hidup',
-    tagline: 'Latihan kekuatan tubuh tanpa alat gym yang fleksibel di rumah.',
-    instructor: 'Bro Fitness',
-    price: 35000,
-    rating: 4.0,
-    thumbnailAsset: 'assets/images/thumb_kalistenik.png',
+    tagline: 'Mempelajari latihan kekuatan tubuh menggunakan berat badan sendiri bagi pemula.',
+    instructor: 'Pierre Dallati',
+    price: 40000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_kalistenik.png',
     whatYouWillLearn: [
-      'Gerakan Dasar Push-up, Pull-up, Squat',
-      'Program Progresi Kekuatan Tubuh',
+      'Kalistenik Dari Nol',
+      'Belajar Kalistenik',
+      'Belajar Skill Kalistenik',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Panduan latihan fisik menggunakan berat tubuh sendiri untuk membentuk otot, kelenturan, dan kebugaran prima.',
+        'Tingkatkan kebugaran dan bentuk tubuh ideal Anda hanya dari rumah melalui kursus Kalistenik Untuk Pemula. Program ini dirancang khusus untuk membantu pemula menguasai latihan kekuatan menggunakan beban tubuh sendiri (bodyweight training) secara tepat, aman, dan bertahap.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
   const CourseModel(
     id: 'gerakan_yoga',
@@ -328,9 +356,12 @@ List<CourseModel> getCoursesByCategory(String category) {
 CourseModel findOrCreateCourse(Map<String, dynamic> item, String defaultCategory) {
   final title = (item['title'] ?? '').toString();
   final rawTitle = title.toLowerCase().trim();
-  final normalizedTitle = (rawTitle == 'tips disiplin membangun kebiasaan')
-      ? 'cara jitu membangun kebiasaan'
-      : rawTitle;
+  String normalizedTitle = rawTitle;
+  if (normalizedTitle == 'tips disiplin membangun kebiasaan') {
+    normalizedTitle = 'cara jitu membangun kebiasaan';
+  } else if (normalizedTitle == 'belajar adobe ilustrasi dari nol') {
+    normalizedTitle = 'belajar adobe ilustrator dari nol';
+  }
 
   return allCourses.firstWhere(
     (c) => c.title.toLowerCase().trim() == normalizedTitle,

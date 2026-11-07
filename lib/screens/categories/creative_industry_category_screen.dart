@@ -149,9 +149,9 @@ class CreativeIndustryCategoryScreen extends StatelessWidget {
       {
         'title': 'Belajar Adobe Ilustrator Dari Nol',
         'author': 'Channel Ruang Belajar',
-        'image': 'assets/images/thumb_illustrator.png',
+        'image': 'assets/images/banner_adobe_illustrator.png',
         'rating': 4,
-        'price': 'Rp. 32.000',
+        'price': 'Rp. 120.000',
       },
     ];
 

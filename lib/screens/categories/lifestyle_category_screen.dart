@@ -148,10 +148,10 @@ class LifestyleCategoryScreen extends StatelessWidget {
     final classes = [
       {
         'title': 'Kalistenik Untuk Pemula',
-        'author': 'Pierre Dalati',
-        'image': 'assets/images/thumb_kalistenik.png',
-        'rating': 4,
-        'price': 'Rp. 60.000',
+        'author': 'Pierre Dallati',
+        'image': 'assets/images/banner_kalistenik.png',
+        'rating': 5,
+        'price': 'Rp. 40.000',
       },
       {
         'title': 'Gerakan Yoga Pemula',
