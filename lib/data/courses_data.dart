@@ -64,35 +64,63 @@ final List<CourseModel> allCourses = [
     id: 'filosofi_anti_cemas',
     title: 'Filosofi Anti Cemas',
     category: 'Pengembangan Pribadi',
-    tagline: 'Menerapkan kebijaksanaan Stoikisme dalam menghadapi tekanan hidup.',
-    instructor: 'Henry Manampiring',
-    price: 45000,
-    rating: 4.5,
-    thumbnailAsset: 'assets/images/thumb_filosofi_anti_cemas.png',
+    tagline:
+        'Mempelajari cara mengelola kecemasan dan menghadapi pikiran dengan lebih tenang.',
+    instructor: 'Greatmind',
+    price: 30000,
+    rating: 4.0,
+    thumbnailAsset: 'assets/images/banner_filosofi_anti_cemas.png',
     whatYouWillLearn: [
-      'Konsep Dikotomi Kendali',
-      'Menjaga Ketenangan Pikiran',
+      'Filosofi Anti Cemas',
+      'Belajar Filosofi',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Belajar mengendalikan emosi dan mengatasi kecemasan berlebih dengan prinsip-prinsip filosofi teras untuk ketenangan batin sehari-hari.',
+        'Pelajari filosofi Stoikisme sebagai panduan praktis untuk mengelola kecemasan dan menghadapi dinamika pikiran secara lebih tenang. Dipandu oleh Greatmind, kursus ini mengajak Anda memahami prinsip dikotomi kendali membedakan hal-hal yang dapat kita kontrol dan yang berada di luar kendali kita guna membangun ketahanan mental, kedamaian batin, serta kecerdasan emosional dalam kehidupan sehari-hari.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
 
   // --- PRODUKTIVITAS KANTOR ---
   const CourseModel(
     id: 'excel_nol',
-    title: 'Belajar Excel dari Nol',
+    title: 'Belajar Excel Dari Nol',
     category: 'Produktivitas Kantor',
-    tagline: 'Kuasai rumus dan fungsi esensial spreadsheet perkantoran.',
+    tagline:
+        'Mempelajari dasar Microsoft Excel, mulai dari pengolahan data hingga penggunaan rumus sederhana.',
     instructor: 'Ignasius Ryan',
-    price: 25000,
+    price: 60000,
     rating: 5.0,
-    thumbnailAsset: 'assets/images/thumb_excel_nol.png',
+    thumbnailAsset: 'assets/images/banner_excel_nol.png',
     whatYouWillLearn: [
-      'Rumus VLOOKUP, HLOOKUP, XLOOKUP',
-      'Pivot Table dan Visualisasi Data',
+      'Excel Hingga Bisa',
+      'Belajar Excel',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Pelajari Microsoft Excel dari tingkat pemula hingga mahir untuk mengotomatisasi pekerjaan administrasi dan analisis data kantor.',
+        'Kuasai dasar-dasar pengolahan data digital melalui materi Belajar Excel Dari Nol. Kursus ini dirancang khusus untuk membimbing Anda memahami penggunaan perangkat lunak Microsoft Excel secara terstruktur, mulai dari pengenalan antarmuka hingga penerapan rumus-rumus esensial yang mudah dipahami.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
   const CourseModel(
     id: 'manajemen_waktu',

@@ -163,9 +163,9 @@ class SelfImprovementCategoryScreen extends StatelessWidget {
       {
         'title': 'Filosofi Anti Cemas',
         'author': 'Greatmind',
-        'image': 'assets/images/thumb_filosofi_anti_cemas.png',
-        'rating': 5,
-        'price': 'Rp. 50.000',
+        'image': 'assets/images/banner_filosofi_anti_cemas.png',
+        'rating': 4,
+        'price': 'Rp. 30.000',
       },
     ];
 

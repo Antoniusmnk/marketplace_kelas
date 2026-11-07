@@ -147,11 +147,11 @@ class OfficeProductivityCategoryScreen extends StatelessWidget {
   Widget _buildAllClassesList() {
     final classes = [
       {
-        'title': 'Belajar Excel dari Nol',
+        'title': 'Belajar Excel Dari Nol',
         'author': 'Ignasius Ryan',
-        'image': 'assets/images/thumb_excel_nol.png',
+        'image': 'assets/images/banner_excel_nol.png',
         'rating': 5,
-        'price': 'Rp. 25.000',
+        'price': 'Rp. 60.000',
       },
       {
         'title': 'Manajemen Waktu',
