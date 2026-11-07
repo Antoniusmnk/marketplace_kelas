@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'academic_category_screen.dart';
-import 'account_screen.dart';
-import 'business_category_screen.dart';
-import 'category_list_screen.dart';
-import 'computer_network_category_screen.dart';
+import '../categories/academic_category_screen.dart';
+import '../account/account_screen.dart';
+import '../categories/business_category_screen.dart';
+import '../categories/category_list_screen.dart';
+import '../categories/computer_network_category_screen.dart';
 import 'course_screen.dart';
-import 'creative_industry_category_screen.dart';
-import 'development_category_screen.dart';
-import 'lifestyle_category_screen.dart';
-import 'login_screen.dart';
+import '../categories/creative_industry_category_screen.dart';
+import '../categories/development_category_screen.dart';
+import '../categories/lifestyle_category_screen.dart';
+import '../auth/login_screen.dart';
 import 'notification_screen.dart';
-import 'office_productivity_category_screen.dart';
+import '../categories/office_productivity_category_screen.dart';
 import 'popular_courses_screen.dart';
 import 'purchase_screen.dart';
 import 'search_screen.dart';
-import 'self_improvement_category_screen.dart';
-import 'splash_screen.dart';
+import '../categories/self_improvement_category_screen.dart';
+import '../auth/splash_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

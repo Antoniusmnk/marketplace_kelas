@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../widgets/nexa_logo.dart';
+import '../../widgets/nexa_logo.dart';
 import 'register_screen.dart';
 
 class SplashScreen extends StatefulWidget {

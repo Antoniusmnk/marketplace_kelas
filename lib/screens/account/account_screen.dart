@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'customer_service_screen.dart';
 import 'full_profile_screen.dart';
-import 'login_screen.dart';
+import '../auth/login_screen.dart';
 import 'privacy_policy_screen.dart';
-import 'splash_screen.dart';
+import '../auth/splash_screen.dart';
 import 'terms_and_conditions_screen.dart';
 
 class AccountScreen extends StatefulWidget {

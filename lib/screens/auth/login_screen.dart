@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../widgets/nexa_logo.dart';
+import '../../widgets/nexa_logo.dart';
 import 'loading_screen.dart';
 import 'register_screen.dart';
 

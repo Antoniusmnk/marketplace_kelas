@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'home_screen.dart';
+import '../main/home_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   final Widget? nextScreen;
