@@ -147,11 +147,11 @@ class ComputerNetworkCategoryScreen extends StatelessWidget {
   Widget _buildAllClassesList() {
     final classes = [
       {
-        'title': 'Pengenalan Hardware Dan Software',
+        'title': 'Pengenalan Hardware dan Software',
         'author': 'Kriting Coding',
-        'image': 'assets/images/thumb_hardware_software.png',
-        'rating': 4,
-        'price': 'Rp. 25.000',
+        'image': 'assets/images/banner_hardware_software.png',
+        'rating': 5,
+        'price': 'Rp. 20.000',
       },
     ];
 

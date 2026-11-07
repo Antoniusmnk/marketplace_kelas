@@ -155,9 +155,9 @@ class OfficeProductivityCategoryScreen extends StatelessWidget {
       },
       {
         'title': 'Manajemen Waktu',
-        'author': 'Satu Persen - Indonesian Life School',
-        'image': 'assets/images/thumb_manajemen_waktu.png',
-        'rating': 4,
+        'author': 'Satu Persen-Indonesian Life School',
+        'image': 'assets/images/banner_manajemen_waktu.png',
+        'rating': 5,
         'price': 'Rp. 30.000',
       },
     ];

@@ -126,35 +126,64 @@ final List<CourseModel> allCourses = [
     id: 'manajemen_waktu',
     title: 'Manajemen Waktu',
     category: 'Produktivitas Kantor',
-    tagline: 'Teknik efektif mengelola prioritas dan mengatasi prokrastinasi.',
-    instructor: 'Satu Persen - Indonesian Life School',
+    tagline:
+        'Mempelajari cara mengatur waktu agar kegiatan lebih teratur dan produktif.',
+    instructor: 'Satu Persen-Indonesian Life School',
     price: 30000,
-    rating: 4.0,
-    thumbnailAsset: 'assets/images/thumb_manajemen_waktu.png',
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_manajemen_waktu.png',
     whatYouWillLearn: [
-      'Metode Time Blocking & Pomodoro',
-      'Matriks Prioritas Eisenhower',
+      'Manajemen Waktu Hingga Bisa',
+      'Belajar Manajemen Waktu',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Tingkatkan efisiensi kerja dengan memahami cara menetapkan skala prioritas dan mengatur jadwal kerja tanpa burnout.',
+        'Pelajari cara mengelola waktu dengan efektif agar kegiatan harian Anda menjadi lebih teratur dan produktif. Dipandu oleh Satu Persen, kursus ini membagikan teknik praktis untuk menentukan skala prioritas, mengalahkan kebiasaan menunda-nunda, serta menciptakan keseimbangan antara pekerjaan dan kehidupan pribadi tanpa merasa burnout.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
 
   // --- KOMPUTER & JARINGAN ---
   const CourseModel(
     id: 'hardware_software',
-    title: 'Pengenalan Hardware Dan Software',
+    title: 'Pengenalan Hardware dan Software',
     category: 'Komputer & Jaringan',
-    tagline: 'Memahami arsitektur perangkat keras dan sistem perangkat lunak.',
+    tagline:
+        'Mengenal perangkat keras dan perangkat lunak serta fungsinya pada komputer.',
     instructor: 'Kriting Coding',
-    price: 25000,
-    rating: 4.0,
-    thumbnailAsset: 'assets/images/thumb_hardware_software.png',
+    price: 20000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_hardware_software.png',
     whatYouWillLearn: [
-      'Komponen Utama Motherboard, CPU, RAM',
-      'Dasar Sistem Operasi & Troubleshooting',
+      'Hardware & Software Hingga Bisa',
+      'Belajar Hardware',
+      'Belajar Software',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Fondasi penting bagi siapa saja yang ingin memahami cara kerja komputer, perakitan PC, dan penanganan masalah dasar perangkat keras.',
+        'Pahami dasar-dasar dunia komputer melalui materi Pengenalan Hardware dan Software. Kursus ini dirancang khusus untuk memberikan pemahaman dasar yang kuat, interaktif, dan mudah dipahami mengenai komponen fisik serta sistem program yang menjalankan sistem komputer.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
 
   // --- INDUSTRI KREATIF ---
@@ -288,17 +317,32 @@ final List<CourseModel> allCourses = [
     id: 'program_gym',
     title: 'Program Gym Untuk Pemula',
     category: 'Gaya Hidup',
-    tagline: 'Panduan lengkap latihan beban terstruktur dan pola nutrisi.',
-    instructor: 'Coach Anton',
-    price: 45000,
+    tagline:
+        'Mempelajari teknik latihan gym dasar untuk membangun kekuatan dan menjaga kebugaran tubuh.',
+    instructor: 'Dunia Ade Rai',
+    price: 40000,
     rating: 5.0,
-    thumbnailAsset: 'assets/images/thumb_gym.png',
+    thumbnailAsset: 'assets/images/banner_program_gym.png',
     whatYouWillLearn: [
-      'Bentuk Gerakan Latihan Beban Benar',
-      'Penyusunan Rencana Latihan Mingguan',
+      'Gerakan Gym',
+      'Belajar Gym',
+      'Belajar Mind Muscle',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Hindari cedera dan maksimalkan hasil latihan di gym dengan program terstruktur khusus pemula.',
+        'Tingkatkan kekuatan fisik dan bentuk tubuh ideal Anda melalui kursus Program Gym Untuk Pemula. Dipandu oleh pakar fitness, program ini dirancang khusus untuk membantu pemula memahami dasar-dasar latihan beban serta teknik gym secara aman, terstruktur, dan efektif.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
 
   // --- AKADEMIK ---

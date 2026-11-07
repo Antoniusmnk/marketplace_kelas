@@ -163,9 +163,9 @@ class LifestyleCategoryScreen extends StatelessWidget {
       {
         'title': 'Program Gym Untuk Pemula',
         'author': 'Dunia Ade Rai',
-        'image': 'assets/images/thumb_gym.png',
+        'image': 'assets/images/banner_program_gym.png',
         'rating': 5,
-        'price': 'Rp. 50.000',
+        'price': 'Rp. 40.000',
       },
     ];
 
