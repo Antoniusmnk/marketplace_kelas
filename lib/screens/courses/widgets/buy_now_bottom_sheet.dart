@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/course_model.dart';
+import '../purchase_loading_screen.dart';
 
 class BuyNowBottomSheet extends StatelessWidget {
   final CourseModel? course;
@@ -165,13 +166,10 @@ class BuyNowBottomSheet extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context); // Tutup bottom sheet
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Pembelian berhasil diproses dengan Google Play.',
-                        style: TextStyle(fontFamily: 'Poppins'),
-                      ),
-                      duration: Duration(seconds: 2),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const PurchaseLoadingScreen(),
                     ),
                   );
                 },
