@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../data/courses_data.dart';
+import '../courses/course_detail_screen.dart';
 
 class SelfImprovementCategoryScreen extends StatelessWidget {
   final Function(int)? onNavigateTab;
@@ -175,13 +177,25 @@ class SelfImprovementCategoryScreen extends StatelessWidget {
       separatorBuilder: (context, index) => const SizedBox(height: 18),
       itemBuilder: (context, index) {
         final item = classes[index];
-        return _buildClassListItem(item);
+        return _buildClassListItem(context, item);
       },
     );
   }
 
-  Widget _buildClassListItem(Map<String, dynamic> item) {
-    return Row(
+  Widget _buildClassListItem(BuildContext context, Map<String, dynamic> item) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CourseDetailScreen(
+              course: findOrCreateCourse(item, 'Pengembangan Pribadi'),
+            ),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(8),
+      child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Thumbnail Image (70x70)
@@ -252,6 +266,7 @@ class SelfImprovementCategoryScreen extends StatelessWidget {
           ),
         ),
       ],
+      ),
     );
   }
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../data/courses_data.dart';
+import '../courses/course_detail_screen.dart';
+import 'popular_courses_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   final Function(int)? onTabChange;
@@ -201,10 +204,19 @@ class _SearchScreenState extends State<SearchScreen> {
 
   // --- Banner Rekomendasi (Scroll Horizontal) ---
   Widget _buildRecommendationBanners() {
-    final banners = [
-      'assets/images/banner_matematika.png',
-      'assets/images/banner_kimia.png',
-      'assets/images/banner_inggris.png',
+    final bannerCourses = [
+      {
+        'title': 'Privat Matematika Profesional',
+        'image': 'assets/images/banner_matematika.png',
+      },
+      {
+        'title': 'Kimia Versi Mudah Paham',
+        'image': 'assets/images/banner_kimia.png',
+      },
+      {
+        'title': 'Kursus Bahasa Inggris',
+        'image': 'assets/images/banner_inggris.png',
+      },
     ];
 
     return SizedBox(
@@ -213,14 +225,28 @@ class _SearchScreenState extends State<SearchScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: banners.length,
+        itemCount: bannerCourses.length,
         separatorBuilder: (context, index) => const SizedBox(width: 14),
         itemBuilder: (context, index) {
-          return ClipRRect(
+          final item = bannerCourses[index];
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CourseDetailScreen(
+                    course: findOrCreateCourse(item, 'Akademik'),
+                  ),
+                ),
+              );
+            },
             borderRadius: BorderRadius.circular(14),
-            child: Image.asset(
-              banners[index],
-              fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: Image.asset(
+                item['image']!,
+                fit: BoxFit.cover,
+              ),
             ),
           );
         },
@@ -260,7 +286,16 @@ class _SearchScreenState extends State<SearchScreen> {
           // Kartu Terakhir: Box Merah 'Lainnya' persis sesuai Figma
           if (index == courses.length) {
             return InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PopularCoursesScreen(
+                      onNavigateTab: widget.onTabChange,
+                    ),
+                  ),
+                );
+              },
               borderRadius: BorderRadius.circular(12),
               child: Container(
                 width: 90,
@@ -283,8 +318,20 @@ class _SearchScreenState extends State<SearchScreen> {
           }
 
           final c = courses[index];
-          return Container(
-            width: 145,
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CourseDetailScreen(
+                    course: findOrCreateCourse(c, 'Populer'),
+                  ),
+                ),
+              );
+            },
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              width: 145,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
@@ -340,6 +387,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               ],
+            ),
             ),
           );
         },

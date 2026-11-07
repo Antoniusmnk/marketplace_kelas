@@ -297,3 +297,38 @@ CourseModel? getCourseById(String id) {
 List<CourseModel> getCoursesByCategory(String category) {
   return allCourses.where((c) => c.category == category).toList();
 }
+
+CourseModel findOrCreateCourse(Map<String, dynamic> item, String defaultCategory) {
+  final title = (item['title'] ?? '').toString();
+  return allCourses.firstWhere(
+    (c) => c.title.toLowerCase().trim() == title.toLowerCase().trim(),
+    orElse: () {
+      final rawPrice = item['price'] != null ? item['price'].toString() : '30000';
+      final cleanPrice = int.tryParse(rawPrice.replaceAll(RegExp(r'[^0-9]'), '')) ?? 30000;
+      final rawRating = item['rating'] != null ? double.tryParse(item['rating'].toString()) ?? 4.0 : 4.0;
+      final author = (item['author'] ?? item['tutor'] ?? 'Instruktur Nexa').toString();
+      final image = (item['image'] ?? item['thumbnail'] ?? 'assets/images/thumb_pola_bicara.png').toString();
+      return CourseModel(
+        id: title.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '_'),
+        title: title,
+        category: defaultCategory,
+        tagline: 'Pelajari $title secara praktis dan aplikatif.',
+        instructor: author,
+        price: cleanPrice,
+        rating: rawRating,
+        thumbnailAsset: image,
+        whatYouWillLearn: [
+          'Pengenalan & Konsep Dasar $title',
+          'Implementasi & Contoh Kasus',
+        ],
+        includes: const [
+          'Video Pendukung',
+          'File Materi',
+          'Akses Seumur Hidup',
+          'Sertifikat Penyelesaian',
+        ],
+        description: 'Materi pembelajaran komprehensif mengenai $title yang dipandu oleh $author.',
+      );
+    },
+  );
+}

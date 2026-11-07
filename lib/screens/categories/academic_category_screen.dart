@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../data/courses_data.dart';
+import '../courses/course_detail_screen.dart';
 
 class AcademicCategoryScreen extends StatelessWidget {
   final Function(int)? onNavigateTab;
@@ -256,14 +258,26 @@ class AcademicCategoryScreen extends StatelessWidget {
         separatorBuilder: (context, index) => const SizedBox(width: 14),
         itemBuilder: (context, index) {
           final item = popularClasses[index];
-          return _buildPopularCard(item);
+          return _buildPopularCard(context, item);
         },
       ),
     );
   }
 
-  Widget _buildPopularCard(Map<String, dynamic> item) {
-    return Container(
+  Widget _buildPopularCard(BuildContext context, Map<String, dynamic> item) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CourseDetailScreen(
+              course: findOrCreateCourse(item, 'Akademik'),
+            ),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
       width: 236,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -341,6 +355,7 @@ class AcademicCategoryScreen extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ],
+      ),
       ),
     );
   }
@@ -421,13 +436,25 @@ class AcademicCategoryScreen extends StatelessWidget {
       separatorBuilder: (context, index) => const SizedBox(height: 14),
       itemBuilder: (context, index) {
         final item = allClasses[index];
-        return _buildClassListItem(item);
+        return _buildClassListItem(context, item);
       },
     );
   }
 
-  Widget _buildClassListItem(Map<String, dynamic> item) {
-    return Row(
+  Widget _buildClassListItem(BuildContext context, Map<String, dynamic> item) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CourseDetailScreen(
+              course: findOrCreateCourse(item, 'Akademik'),
+            ),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(6),
+      child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Thumbnail Image
@@ -498,6 +525,7 @@ class AcademicCategoryScreen extends StatelessWidget {
           ),
         ),
       ],
+      ),
     );
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../data/courses_data.dart';
+import '../courses/course_detail_screen.dart';
 
 class PopularCoursesScreen extends StatelessWidget {
   final Function(int)? onNavigateTab;
@@ -131,7 +133,19 @@ class PopularCoursesScreen extends StatelessWidget {
                 separatorBuilder: (context, index) => const SizedBox(height: 20),
                 itemBuilder: (context, index) {
                   final c = courses[index];
-                  return Row(
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CourseDetailScreen(
+                            course: findOrCreateCourse(c, 'Populer'),
+                          ),
+                        ),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(10),
+                    child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Kolom Kiri: Thumbnail Gambar + Judul & Tutor di bawahnya
@@ -224,6 +238,7 @@ class PopularCoursesScreen extends StatelessWidget {
                         ),
                       ),
                     ],
+                    ),
                   );
                 },
               ),
