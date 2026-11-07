@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/course_model.dart';
 import 'widgets/cart_success_bottom_sheet.dart';
+import 'widgets/buy_now_bottom_sheet.dart';
 import '../main/home_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
@@ -244,14 +245,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             height: 44,
             child: ElevatedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Menuju pembelian: ${widget.course.title}',
-                      style: const TextStyle(fontFamily: 'Poppins'),
-                    ),
-                  ),
-                );
+                BuyNowBottomSheet.show(context, course: widget.course);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
