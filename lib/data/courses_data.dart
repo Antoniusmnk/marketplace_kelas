@@ -32,20 +32,33 @@ final List<CourseModel> allCourses = [
     ],
   ),
   const CourseModel(
-    id: 'tips_kebiasaan',
-    title: 'Tips Disiplin Membangun Kebiasaan',
+    id: 'membangun_kebiasaan',
+    title: 'Cara Jitu Membangun Kebiasaan',
     category: 'Pengembangan Pribadi',
-    tagline: 'Membangun konsistensi dan produktivitas harian yang berkelanjutan.',
+    tagline: 'Mempelajari cara membentuk dan mempertahankan kebiasaan positif secara konsisten.',
     instructor: 'Maudy Ayunda',
-    price: 50000,
+    price: 45000,
     rating: 5.0,
-    thumbnailAsset: 'assets/images/thumb_tips_kebiasaan.png',
+    thumbnailAsset: 'assets/images/banner_membangun_kebiasaan.png',
     whatYouWillLearn: [
-      'Metode Atomic Habits Praktis',
-      'Manajemen Rutinitas Harian',
+      'Membangun Kebiasaan',
+      'Belajar Disiplin',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Panduan lengkap membangun kebiasaan positif dan menghentikan kebiasaan buruk dengan strategi psikologi perilaku yang terbukti efektif.',
+        'Tingkatkan kualitas hidup Anda dengan mempelajari cara membentuk dan mempertahankan kebiasaan positif secara konsisten. Dipandu langsung oleh Maudy Ayunda, kursus ini membagikan strategi praktis berbasis sains untuk merancang rutinitas harian yang efektif, mengatasi rasa malas, serta membangun mindset yang mendukung keberhasilan jangka panjang.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
   const CourseModel(
     id: 'filosofi_anti_cemas',
@@ -139,17 +152,31 @@ final List<CourseModel> allCourses = [
     id: 'dasar_pemrograman',
     title: 'Dasar Pemrograman',
     category: 'Pengembangan',
-    tagline: 'Logika dan algoritma dasar untuk pemula yang ingin belajar coding.',
-    instructor: 'Zuck Lab',
-    price: 80000,
-    rating: 4.0,
-    thumbnailAsset: 'assets/images/thumb_dasar_pemrograman.png',
+    tagline: 'Mempelajari konsep dasar pemrograman, logika, dan penulisan kode.',
+    instructor: 'Edcent',
+    price: 90000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_dasar_pemrograman.png',
     whatYouWillLearn: [
-      'Variabel, Tipe Data, dan Percabangan',
-      'Perulangan & Struktur Algoritma',
+      'Pemrograman dari nol',
+      'Belajar HTML',
+      'Belajar CSS',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Pelajari dasar-dasar logika pemrograman yang berlaku untuk semua bahasa pemrograman seperti Python, JavaScript, dan Dart.',
+        'Pelajari fondasi utama dunia pemrograman mulai dari konsep dasar, logika, hingga teknik penulisan kode yang efektif. Kursus ini dirancang khusus untuk pemula yang ingin memahami bagaimana pemikiran komputasional bekerja serta siap melangkah ke jenjang pengembangan perangkat lunak secara percaya diri.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
   const CourseModel(
     id: 'tutorial_mysql',
@@ -300,8 +327,13 @@ List<CourseModel> getCoursesByCategory(String category) {
 
 CourseModel findOrCreateCourse(Map<String, dynamic> item, String defaultCategory) {
   final title = (item['title'] ?? '').toString();
+  final rawTitle = title.toLowerCase().trim();
+  final normalizedTitle = (rawTitle == 'tips disiplin membangun kebiasaan')
+      ? 'cara jitu membangun kebiasaan'
+      : rawTitle;
+
   return allCourses.firstWhere(
-    (c) => c.title.toLowerCase().trim() == title.toLowerCase().trim(),
+    (c) => c.title.toLowerCase().trim() == normalizedTitle,
     orElse: () {
       final rawPrice = item['price'] != null ? item['price'].toString() : '30000';
       final cleanPrice = int.tryParse(rawPrice.replaceAll(RegExp(r'[^0-9]'), '')) ?? 30000;

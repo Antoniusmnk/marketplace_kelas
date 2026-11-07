@@ -154,11 +154,11 @@ class SelfImprovementCategoryScreen extends StatelessWidget {
         'price': 'Rp. 80.000',
       },
       {
-        'title': 'Tips Disiplin Membangun Kebiasaan',
+        'title': 'Cara Jitu Membangun Kebiasaan',
         'author': 'Maudy Ayunda',
-        'image': 'assets/images/thumb_tips_kebiasaan.png',
+        'image': 'assets/images/banner_membangun_kebiasaan.png',
         'rating': 5,
-        'price': 'Rp. 50.000',
+        'price': 'Rp. 45.000',
       },
       {
         'title': 'Filosofi Anti Cemas',

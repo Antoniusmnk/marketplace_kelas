@@ -148,10 +148,10 @@ class DevelopmentCategoryScreen extends StatelessWidget {
     final classes = [
       {
         'title': 'Dasar Pemrograman',
-        'author': 'WPU',
-        'image': 'assets/images/thumb_dasar_pemrograman.png',
+        'author': 'Edcent',
+        'image': 'assets/images/banner_dasar_pemrograman.png',
         'rating': 5,
-        'price': 'Rp. 80.000',
+        'price': 'Rp. 90.000',
       },
       {
         'title': 'Tutorial MySQL Database',
