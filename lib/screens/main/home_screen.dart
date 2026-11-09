@@ -333,17 +333,58 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildSubjectItem(Map<String, String> subject) {
+  // Mapping Mata Pelajaran ke ID Kursus Spesifik
+  static const Map<String, String> _subjectToCourseId = {
+    'matematika': 'matematika_profesional',
+    'b. indonesia': 'pemahaman_bacaan_menulis',
+    'bahasa indonesia': 'pemahaman_bacaan_menulis',
+    'fisika': 'termodinamika',
+    'b. inggris': 'kursus_bahasa_inggris',
+    'bahasa inggris': 'kursus_bahasa_inggris',
+    'kimia': 'termokimia',
+    'biologi': 'biologi_sel_molekuler',
+    'ekonomi': 'kebijakan_fiskal_moneter',
+    'sosiologi': 'sosiologi_tka',
+    'geografi': 'geografi_sma_tka',
+    'pkn': 'gagasan_pendiri_negara',
+    'informatika': 'oop_informatika',
+  };
+
+  void _onSubjectSelected(Map<String, String> subject, {bool fromBottomSheet = false}) {
+    final name = (subject['name'] ?? '').trim();
+    if (name == 'Lainnya') {
+      _showOtherSubjectsBottomSheet();
+      return;
+    }
+
+    if (fromBottomSheet) {
+      Navigator.pop(context); // Tutup bottom sheet terlebih dahulu
+    }
+
+    final key = name.toLowerCase();
+    final courseId = _subjectToCourseId[key];
+    final course = courseId != null ? getCourseById(courseId) : null;
+
+    if (course != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => CourseDetailScreen(course: course),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Kursus untuk $name belum tersedia.'),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  Widget _buildSubjectItem(Map<String, String> subject, {bool isFromBottomSheet = false}) {
     return InkWell(
-      onTap: () {
-        if (subject['name'] == 'Lainnya') {
-          _showOtherSubjectsBottomSheet();
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Membuka kategori ${subject['name']}')),
-          );
-        }
-      },
+      onTap: () => _onSubjectSelected(subject, fromBottomSheet: isFromBottomSheet),
       borderRadius: BorderRadius.circular(8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -424,15 +465,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: mainSubjectsWithoutOther
                           .sublist(0, 4)
-                          .map((s) => Expanded(child: _buildSubjectItem(s)))
+                          .map((s) => Expanded(child: _buildSubjectItem(s, isFromBottomSheet: true)))
                           .toList(),
                     ),
                     const SizedBox(height: 18),
                     // Baris 2: Kimia, Biologi
                     Row(
                       children: [
-                        Expanded(child: _buildSubjectItem(mainSubjectsWithoutOther[4])),
-                        Expanded(child: _buildSubjectItem(mainSubjectsWithoutOther[5])),
+                        Expanded(child: _buildSubjectItem(mainSubjectsWithoutOther[4], isFromBottomSheet: true)),
+                        Expanded(child: _buildSubjectItem(mainSubjectsWithoutOther[5], isFromBottomSheet: true)),
                         const Expanded(child: SizedBox()),
                         const Expanded(child: SizedBox()),
                       ],
@@ -469,14 +510,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: otherSubjects
                           .sublist(0, 4)
-                          .map((s) => Expanded(child: _buildSubjectItem(s)))
+                          .map((s) => Expanded(child: _buildSubjectItem(s, isFromBottomSheet: true)))
                           .toList(),
                     ),
                     const SizedBox(height: 18),
                     // Baris 2: Informatika
                     Row(
                       children: [
-                        Expanded(child: _buildSubjectItem(otherSubjects[4])),
+                        Expanded(child: _buildSubjectItem(otherSubjects[4], isFromBottomSheet: true)),
                         const Expanded(child: SizedBox()),
                         const Expanded(child: SizedBox()),
                         const Expanded(child: SizedBox()),
