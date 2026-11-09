@@ -368,7 +368,7 @@ final List<CourseModel> allCourses = [
     instructor: 'Jerome Polin',
     price: 45000,
     rating: 5.0,
-    thumbnailAsset: 'assets/images/pop_matematika.png',
+    thumbnailAsset: 'assets/images/banner_kursus_matematika.png',
     whatYouWillLearn: [
       'Aljabar Lanjutan & Trigonometri',
       'Trik Cepat Soal Ujian Nasional & UTBK',
@@ -384,7 +384,7 @@ final List<CourseModel> allCourses = [
     instructor: 'Ruang Kimia',
     price: 35000,
     rating: 4.5,
-    thumbnailAsset: 'assets/images/pop_kimia.png',
+    thumbnailAsset: 'assets/images/banner_kursus_kimia.png',
     whatYouWillLearn: [
       'Stoikiometri & Hukum Dasar Kimia',
       'Ikatan Kimia dan Struktur Atom',
@@ -400,7 +400,7 @@ final List<CourseModel> allCourses = [
     instructor: 'English Academy',
     price: 50000,
     rating: 5.0,
-    thumbnailAsset: 'assets/images/pop_inggris.png',
+    thumbnailAsset: 'assets/images/banner_kursus_inggris.png',
     whatYouWillLearn: [
       'Speaking Fluency & Pronunciation',
       'Struktur Tenses & Writing Dasar',

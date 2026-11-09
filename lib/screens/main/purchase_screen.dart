@@ -17,9 +17,9 @@ class PurchaseScreen extends StatelessWidget {
     );
 
     final banners = [
-      'assets/images/banner_matematika.png',
-      'assets/images/banner_kimia.png',
-      'assets/images/banner_inggris.png',
+      'assets/images/banner_kursus_matematika.png',
+      'assets/images/banner_kursus_kimia.png',
+      'assets/images/banner_kursus_inggris.png',
     ];
 
     return Scaffold(

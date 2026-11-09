@@ -72,7 +72,7 @@ class PurchaseSuccessScreen extends StatelessWidget {
 
                       // Teks Deskripsi Informasi Akun
                       const Text(
-                        'Anda berhasil membeloi produk dari\nNexa-Course Online, dan masuk ke\nakunmu.',
+                        'Anda berhasil membeli produk dari\nNexa-Course Online, dan masuk ke\nakunmu.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13.5,

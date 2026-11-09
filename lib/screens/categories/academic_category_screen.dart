@@ -224,7 +224,7 @@ class AcademicCategoryScreen extends StatelessWidget {
         'title': 'Privat Matematika Profesional',
         'desc':
             'Kursus privat matematika bersama tutor profesional dengan materi pembelajaran spesifik.',
-        'image': 'assets/images/banner_matematika.png',
+        'image': 'assets/images/banner_kursus_matematika.png',
         'rating': 5,
         'price': 'Rp. 130.000',
         'author': 'Dibuat oleh Andreas Sd, Smp., Sma',
@@ -232,7 +232,7 @@ class AcademicCategoryScreen extends StatelessWidget {
       {
         'title': 'Kimia Versi Mudah Paham',
         'desc': 'Kursus kimia dengan materi yang mudah untuk dipahami.',
-        'image': 'assets/images/banner_kimia.png',
+        'image': 'assets/images/banner_kursus_kimia.png',
         'rating': 3,
         'price': 'Rp. 150.000',
         'author': 'Dibuat oleh Kak Gem',
@@ -241,7 +241,7 @@ class AcademicCategoryScreen extends StatelessWidget {
         'title': 'Kursus Bahasa Inggris',
         'desc':
             'Kursus bahasa inggris dengan materi yang mudah untuk dipahami untuk persiapan TOEFL',
-        'image': 'assets/images/banner_inggris.png',
+        'image': 'assets/images/banner_kursus_inggris.png',
         'rating': 3,
         'price': 'Rp. 100.000',
         'author': 'Dibuat oleh Marie TOEFL',

@@ -18,7 +18,7 @@ class PopularCoursesScreen extends StatelessWidget {
       'price': 'Rp. 130.000',
       'desc':
           'Kursus privat matematika bersama tutor profesional dengan materi pembelajaran spesifik.',
-      'image': 'assets/images/pop_matematika.png',
+      'image': 'assets/images/banner_kursus_matematika.png',
     },
     {
       'title': 'Kimia Versi Mudah Paham',
@@ -26,7 +26,7 @@ class PopularCoursesScreen extends StatelessWidget {
       'rating': 4.0,
       'price': 'Rp. 150.000',
       'desc': 'Kursus kimia dengan materi yang mudah untuk dipahami.',
-      'image': 'assets/images/pop_kimia.png',
+      'image': 'assets/images/banner_kursus_kimia.png',
     },
     {
       'title': 'Kursus Bahasa inggris',
@@ -35,7 +35,7 @@ class PopularCoursesScreen extends StatelessWidget {
       'price': 'Rp. 100.000',
       'desc':
           'Kursus bahasa inggris untuk meningkatkan skill bahasa inggris',
-      'image': 'assets/images/pop_inggris.png',
+      'image': 'assets/images/banner_kursus_inggris.png',
     },
     {
       'title': 'Belajar Pemrograman Python',
@@ -44,7 +44,7 @@ class PopularCoursesScreen extends StatelessWidget {
       'price': 'Rp. 130.000',
       'desc':
           'Berisikan materi untuk pemula belajar pemrograman python yang rinci.',
-      'image': 'assets/images/pop_python.png',
+      'image': 'assets/images/banner_populer_python.png',
     },
     {
       'title': 'Photoshop Untuk Pemula',
@@ -53,7 +53,7 @@ class PopularCoursesScreen extends StatelessWidget {
       'price': 'Rp. 100.000',
       'desc':
           'Kelas photoshop untuk yang ingin mengembangkan skill editing.',
-      'image': 'assets/images/pop_photoshop.png',
+      'image': 'assets/images/banner_populer_photoshop.png',
     },
     {
       'title': 'Excel Untuk Data Analyst',
@@ -62,7 +62,7 @@ class PopularCoursesScreen extends StatelessWidget {
       'price': 'Rp. 150.000',
       'desc':
           'Kelas excel untuk mengupgrade skill mengelola data bagi data analyst',
-      'image': 'assets/images/pop_excel.png',
+      'image': 'assets/images/banner_populer_excel.png',
     },
   ];
 

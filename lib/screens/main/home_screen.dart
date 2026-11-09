@@ -232,15 +232,15 @@ class _HomeScreenState extends State<HomeScreen> {
     final bannerCourses = [
       {
         'title': 'Privat Matematika Profesional',
-        'image': 'assets/images/banner_matematika.png',
+        'image': 'assets/images/banner_kursus_matematika.png',
       },
       {
         'title': 'Kimia Versi Mudah Paham',
-        'image': 'assets/images/banner_kimia.png',
+        'image': 'assets/images/banner_kursus_kimia.png',
       },
       {
         'title': 'Kursus Bahasa Inggris',
-        'image': 'assets/images/banner_inggris.png',
+        'image': 'assets/images/banner_kursus_inggris.png',
       },
     ];
 
@@ -713,17 +713,17 @@ class _HomeScreenState extends State<HomeScreen> {
       {
         'title': 'Belajar Pemrograman Python',
         'author': 'Programmer Zaman Now',
-        'image': 'assets/images/course_python.png',
+        'image': 'assets/images/banner_populer_python.png',
       },
       {
         'title': 'Belajar Photoshop Untuk Pemula',
         'author': 'Adil',
-        'image': 'assets/images/course_photoshop.png',
+        'image': 'assets/images/banner_populer_photoshop.png',
       },
       {
         'title': 'Excel Untuk Data Analys',
         'author': 'HaloTech academy',
-        'image': 'assets/images/course_excel.png',
+        'image': 'assets/images/banner_populer_excel.png',
       },
     ];
 
