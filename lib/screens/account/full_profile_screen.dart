@@ -1,12 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class FullProfileScreen extends StatelessWidget {
+class FullProfileScreen extends StatefulWidget {
   final Function(int)? onNavigateTab;
+  final String initialName;
+  final String initialPhone;
+  final String initialEmail;
+  final void Function(String name, String phone)? onProfileUpdated;
 
-  const FullProfileScreen({super.key, this.onNavigateTab});
+  const FullProfileScreen({
+    super.key,
+    this.onNavigateTab,
+    this.initialName = 'Budiono Siregar',
+    this.initialPhone = '0123456789',
+    this.initialEmail = 'Budiono@gmail.com',
+    this.onProfileUpdated,
+  });
 
+  @override
+  State<FullProfileScreen> createState() => _FullProfileScreenState();
+}
+
+class _FullProfileScreenState extends State<FullProfileScreen> {
   static const Color primaryColor = Color(0xFF800E13);
+
+  bool _isEditing = false;
+  late String _savedName;
+  late String _savedPhone;
+  late String _savedEmail;
+
+  late final TextEditingController _nameController;
+  late final TextEditingController _phoneController;
+  late final TextEditingController _emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    _savedName = widget.initialName;
+    _savedPhone = widget.initialPhone;
+    _savedEmail = widget.initialEmail;
+
+    _nameController = TextEditingController(text: _savedName);
+    _phoneController = TextEditingController(text: _savedPhone);
+    _emailController = TextEditingController(text: _savedEmail);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +94,18 @@ class FullProfileScreen extends StatelessWidget {
                       size: 24,
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                      if (_isEditing) {
+                        setState(() {
+                          _nameController.text = _savedName;
+                          _phoneController.text = _savedPhone;
+                          _isEditing = false;
+                        });
+                      } else {
+                        Navigator.pop(context, {
+                          'name': _savedName,
+                          'phone': _savedPhone,
+                        });
+                      }
                     },
                   ),
                   const SizedBox(width: 4),
@@ -100,9 +156,9 @@ class FullProfileScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 14),
-                          const Text(
-                            'Budiono Siregar',
-                            style: TextStyle(
+                          Text(
+                            _savedName,
+                            style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
@@ -125,27 +181,36 @@ class FullProfileScreen extends StatelessWidget {
 
                     const SizedBox(height: 28),
 
-                    // Field 1: Nama Lengkap
-                    _buildProfileField(
+                    // Field 1: Nama Lengkap (Editable saat edit mode)
+                    _buildField(
                       label: 'Nama Lengkap',
-                      value: 'Budiono Siregar',
+                      controller: _nameController,
+                      isEditable: true,
                     ),
 
                     const SizedBox(height: 20),
 
-                    // Field 2: No. HP
-                    _buildProfileField(
+                    // Field 2: No. HP (Editable saat edit mode)
+                    _buildField(
                       label: 'No. HP',
-                      value: '0123456789',
+                      controller: _phoneController,
+                      isEditable: true,
+                      keyboardType: TextInputType.phone,
                     ),
 
                     const SizedBox(height: 20),
 
-                    // Field 3: Email
-                    _buildProfileField(
+                    // Field 3: Email (Tidak bisa diedit sesuai kebutuhan)
+                    _buildField(
                       label: 'Email',
-                      value: 'Budiono@gmail.com',
+                      controller: _emailController,
+                      isEditable: false,
                     ),
+
+                    const SizedBox(height: 36),
+
+                    // Bagian Tombol Aksi (Edit Profil ATAU Batal & Simpan)
+                    _buildActionButtons(),
 
                     const SizedBox(height: 40),
                   ],
@@ -160,11 +225,15 @@ class FullProfileScreen extends StatelessWidget {
     );
   }
 
-  // --- Widget Kolom Profil Outlined ---
-  Widget _buildProfileField({
+  // --- Widget Field Outlined (Bisa Teks Biasa atau TextField) ---
+  Widget _buildField({
     required String label,
-    required String value,
+    required TextEditingController controller,
+    bool isEditable = false,
+    TextInputType keyboardType = TextInputType.text,
   }) {
+    final bool canEditThisField = _isEditing && isEditable;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -180,18 +249,173 @@ class FullProfileScreen extends StatelessWidget {
         const SizedBox(height: 8),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: primaryColor, width: 1.2),
           ),
-          child: Text(
-            value,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black87,
-              fontFamily: 'Poppins',
+          child: canEditThisField
+              ? TextField(
+                  controller: controller,
+                  keyboardType: keyboardType,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black87,
+                    fontFamily: 'Poppins',
+                  ),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(vertical: 12),
+                  ),
+                )
+              : Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    controller.text,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                ),
+        ),
+      ],
+    );
+  }
+
+  // --- Tombol Aksi Bawah: Edit Profil / (Batal & Simpan) ---
+  Widget _buildActionButtons() {
+    if (!_isEditing) {
+      // Tampilan Awal: Tombol Marun 'Edit Profil'
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: SizedBox(
+          width: 165,
+          height: 48,
+          child: ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _nameController.text = _savedName;
+                _phoneController.text = _savedPhone;
+                _isEditing = true;
+              });
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+            ),
+            child: const Text(
+              'Edit Profil',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins',
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Tampilan Saat Mode Edit: Tombol 'Batal' dan 'Simpan'
+    return Row(
+      children: [
+        // 1. Tombol Batal
+        Expanded(
+          child: SizedBox(
+            height: 48,
+            child: ElevatedButton(
+              onPressed: () {
+                // Kembalikan isi input ke data tersimpan awal
+                setState(() {
+                  _nameController.text = _savedName;
+                  _phoneController.text = _savedPhone;
+                  _isEditing = false;
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
+              child: const Text(
+                'Batal',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        // 2. Tombol Simpan
+        Expanded(
+          child: SizedBox(
+            height: 48,
+            child: ElevatedButton(
+              onPressed: () {
+                final newName = _nameController.text.trim();
+                final newPhone = _phoneController.text.trim();
+
+                if (newName.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Nama lengkap tidak boleh kosong.',
+                        style: TextStyle(fontFamily: 'Poppins'),
+                      ),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                  return;
+                }
+
+                setState(() {
+                  _savedName = newName;
+                  _savedPhone = newPhone;
+                  _isEditing = false;
+                });
+
+                widget.onProfileUpdated?.call(_savedName, _savedPhone);
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Profil berhasil disimpan!',
+                      style: TextStyle(fontFamily: 'Poppins'),
+                    ),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
+              child: const Text(
+                'Simpan',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Poppins',
+                ),
+              ),
             ),
           ),
         ),
@@ -219,11 +443,17 @@ class FullProfileScreen extends StatelessWidget {
         currentIndex: 4,
         onTap: (index) {
           if (index == 4) {
-            Navigator.pop(context);
+            Navigator.pop(context, {
+              'name': _savedName,
+              'phone': _savedPhone,
+            });
           } else {
-            Navigator.pop(context);
-            if (onNavigateTab != null) {
-              onNavigateTab!(index);
+            Navigator.pop(context, {
+              'name': _savedName,
+              'phone': _savedPhone,
+            });
+            if (widget.onNavigateTab != null) {
+              widget.onNavigateTab!(index);
             }
           }
         },

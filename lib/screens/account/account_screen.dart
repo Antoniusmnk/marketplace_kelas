@@ -20,6 +20,10 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   static const Color primaryColor = Color(0xFF800E13);
 
+  // Data Profil Pengguna
+  String _userName = 'Budiono Siregar';
+  String _userPhone = '0123456789';
+
   // Status Switch Toggle
   bool _wifiOnly = false;
   bool _notification = false;
@@ -109,8 +113,8 @@ class _AccountScreenState extends State<AccountScreen> {
                           const SizedBox(height: 12),
 
                           // Nama Pengguna
-                          const Text(
-                            'Budiono Siregar',
+                          Text(
+                            _userName,
                             style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -122,15 +126,29 @@ class _AccountScreenState extends State<AccountScreen> {
 
                           // Kapsul Tombol "Profil Lengkap"
                           InkWell(
-                            onTap: () {
-                              Navigator.push(
+                            onTap: () async {
+                              final result = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => FullProfileScreen(
+                                    initialName: _userName,
+                                    initialPhone: _userPhone,
                                     onNavigateTab: widget.onNavigateTab,
+                                    onProfileUpdated: (name, phone) {
+                                      setState(() {
+                                        _userName = name;
+                                        _userPhone = phone;
+                                      });
+                                    },
                                   ),
                                 ),
                               );
+                              if (result != null && result is Map && mounted) {
+                                setState(() {
+                                  _userName = result['name'] ?? _userName;
+                                  _userPhone = result['phone'] ?? _userPhone;
+                                });
+                              }
                             },
                             borderRadius: BorderRadius.circular(16),
                             child: Container(
@@ -157,7 +175,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           const SizedBox(height: 8),
 
                           // Label Status "Pelajar"
-                          const Text(
+                          Text(
                             'Pelajar',
                             style: TextStyle(
                               fontSize: 14,
@@ -296,7 +314,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               fit: BoxFit.contain,
                             ),
                             const SizedBox(width: 12),
-                            const Text(
+                            Text(
                               'Log Out',
                               style: TextStyle(
                                 fontSize: 15,
@@ -404,7 +422,7 @@ class _AccountScreenState extends State<AccountScreen> {
                             ),
                             // Custom Animated Switch Toggle
                             GestureDetector(
-                              onTap: () {
+                              onTap: () async {
                                 setModalState(() {
                                   _selectedQuality = option['title']!;
                                   _selectedQualityResolution = option['subtitle']!;
