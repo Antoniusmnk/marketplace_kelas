@@ -84,7 +84,7 @@ class _PurchaseLoadingScreenState extends State<PurchaseLoadingScreen>
               RotationTransition(
                 turns: _rotationController,
                 child: Image.asset(
-                  'assets/images/spinner_purchase.png',
+                  'assets/images/spinner_loading.png',
                   width: 72,
                   height: 72,
                   fit: BoxFit.contain,
