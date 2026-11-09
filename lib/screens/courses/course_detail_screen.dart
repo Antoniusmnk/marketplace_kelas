@@ -178,7 +178,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           const SizedBox(width: 4),
           Expanded(
             child: Text(
-              widget.course.title,
+              widget.course.displayHeaderTitle,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(

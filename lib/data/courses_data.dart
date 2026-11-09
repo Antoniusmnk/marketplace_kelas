@@ -302,16 +302,30 @@ final List<CourseModel> allCourses = [
     title: 'Gerakan Yoga Pemula',
     category: 'Gaya Hidup',
     tagline: 'Menjaga fleksibilitas, pernapasan, dan ketenangan jiwa.',
-    instructor: 'Yoganesia',
-    price: 25000,
-    rating: 4.0,
-    thumbnailAsset: 'assets/images/thumb_yoga.png',
+    instructor: 'BodyFit By Bagus',
+    price: 45000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_yoga.png',
     whatYouWillLearn: [
       'Pose Yoga Dasar & Peregangan',
       'Teknik Pernapasan Pranayama',
+      'Step by Step Sampai Bisa',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Kelas yoga santai yang cocok untuk meredakan ketegangan otot setelah seharian bekerja di depan laptop.',
+        'Kelas yoga santai yang cocok untuk meredakan ketegangan otot setelah seharian bekerja di depan laptop. Dipandu step by step oleh BodyFit By Bagus agar pemula dapat mengikuti gerakan dengan aman dan efektif.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
   const CourseModel(
     id: 'program_gym',
@@ -395,20 +409,285 @@ final List<CourseModel> allCourses = [
         'Tingkatkan rasa percaya diri berbicara bahasa Inggris dalam situasi formal maupun kasual.',
   ),
   const CourseModel(
-    id: 'termodinamika_fisika',
-    title: 'Termodinamika-Fisika SMA',
+    id: 'termodinamika',
+    title: 'Termodinamika',
     category: 'Akademik',
-    tagline: 'Hukum termodinamika dan siklus carnot dengan pembahasan soal.',
-    instructor: 'Fisika Asyik',
-    price: 30000,
+    tagline:
+        'Mempelajari hubungan antara kalor, energi, suhu, dan usaha dalam suatu sistem.',
+    instructor: 'Edcent',
+    price: 80000,
     rating: 4.0,
-    thumbnailAsset: 'assets/images/thumb_termodinamika.png',
+    thumbnailAsset: 'assets/images/banner_termodinamika.png',
     whatYouWillLearn: [
-      'Hukum I & II Termodinamika',
-      'Perhitungan Efisiensi Mesin Kalor',
+      'Termodinamika Hingga Bisa',
+      'Belajar Termodinamika',
+      'Belajar Materi Dinamika',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
     ],
     description:
-        'Kupas tuntas materi termodinamika fisika kelas 11 lengkap dengan simulasi grafik P-V.',
+        'Tingkatkan pemahaman fisika Anda secara mendalam bersama tutor ahli dari Eduosmo. Kursus ini dirancang khusus untuk siswa SMA serta persiapan UTBK SBMPTN dan SIMAK UI. Materi disesuaikan secara personal, mulai dari pemahaman konsep dasar hukum termodinamika, proses gas ideal, hingga trik cepat menyelesaikan soal-soal ujian tingkat tinggi untuk meraih prestasi terbaik!',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'sosiologi_tka',
+    title: 'Materi Sosiologi TKA-SMA',
+    category: 'Akademik',
+    tagline:
+        'Mempelajari konsep sosiologi, interaksi sosial, dan fenomena masyarakat untuk persiapan TKA-SMA.',
+    instructor: 'Laksana UTBK Rangkuman Audio',
+    price: 90000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_sosiologi.png',
+    whatYouWillLearn: [
+      'Sosiologi Hingga Bisa',
+      'Belajar Biologi',
+      'Belajar Sosiologi TKA',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman sosiologi Anda secara mendalam bersama tutor ahli dari Eduosmo. Kursus ini dirancang khusus untuk membantu Anda menguasai materi Sosiologi TKA-SMA dengan metode pembelajaran yang praktis dan fleksibel. Dapatkan bimbingan terstruktur mulai dari konsep dasar hingga pembahasan soal-soal ujian untuk membangun kepercayaan diri dan meraih nilai maksimal!',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'biologi_sel_molekuler',
+    title: 'Dasar Biologi Sel & Molekuler',
+    category: 'Akademik',
+    tagline:
+        'Mempelajari konsep biologi secara mendalam untuk mempersiapkan kompetisi olimpiade sains.',
+    instructor: 'Aldi Yazri',
+    price: 90000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_biologi.png',
+    whatYouWillLearn: [
+      'Biologi Hingga Bisa',
+      'Belajar Biologi',
+      'Belajar Sel & Molekuler',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman biologi Anda secara mendalam bersama tutor ahli dari Eduosmo. Kursus privat ini dirancang khusus untuk persiapan Olimpiade Biologi dengan pembahasan terstruktur mengenai struktur sel, fungsi organel, hingga mekanisme biologi molekuler. Anda akan dibimbing memahami konsep-konsep kompleks secara sistematis untuk membangun kepercayaan diri dan menguasai soal-soal olimpiade dengan maksimal!',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'pemahaman_bacaan_menulis',
+    title: 'Pemahaman Bacaan Dan Menulis UTBK',
+    headerTitle: 'Pemahaman Bacaan Dan Menulis',
+    category: 'Akademik',
+    tagline:
+        'Melatih kemampuan memahami bacaan, menganalisis teks, dan menyusun kalimat secara efektif untuk UTBK.',
+    instructor: 'Integral Education',
+    price: 95000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_pemahaman_bacaan.png',
+    whatYouWillLearn: [
+      'PBM Hingga Bisa',
+      'Belajar PBM',
+      'Belajar Materi PBM',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman matematika Anda secara mendalam dengan bimbingan tutor ahli dari Eduosmo. Kursus privat ini menawarkan pendekatan pembelajaran yang sangat personal, di mana materi disesuaikan secara dinamis dengan kurikulum sekolah atau kebutuhan spesifik Anda. Mulai dari memperkuat fondasi aritmatika hingga menguasai topik-topik kompleks seperti kalkulus, kami siap membantu Anda membangun kepercayaan diri dan mencapai prestasi.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'gagasan_pendiri_negara',
+    title: 'Gagasan Pendiri Negara',
+    category: 'Akademik',
+    tagline:
+        'Mempelajari gagasan para pendiri negara dalam merumuskan dasar negara Indonesia.',
+    instructor: 'Tama Edukasi',
+    price: 60000,
+    rating: 4.0,
+    thumbnailAsset: 'assets/images/banner_gagasan_pendiri_negara.png',
+    whatYouWillLearn: [
+      'PKN Hingga Bisa',
+      'Belajar PKN',
+      'Belajar materi PKN',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman Pendidikan Pancasila dan Kewarganegaraan (PKn) Anda bersama tutor ahli dari Eduosmo. Kursus privat ini dirancang untuk membantu Anda menguasai materi Gagasan Pendiri Negara tentang Dasar Negara serta sejarah penting perumusan Pancasila oleh BPUPKI & PPKI secara mendalam dan terstruktur.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'oop_informatika',
+    title: 'OOP-Informatika-SMA/K',
+    category: 'Akademik',
+    tagline:
+        'Mempelajari konsep pemrograman berorientasi objek dalam Informatika SMA/SMK.',
+    instructor: 'Kelas Terbuka',
+    price: 60000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_oop.png',
+    whatYouWillLearn: [
+      'OOP Hingga Bisa',
+      'Belajar Informatika',
+      'Belajar OOP',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman Informatika dan logika pemrograman Anda lewat materi Object-Oriented Programming (OOP) menggunakan C++. Kursus privat ini dirancang khusus untuk membimbing Anda secara bertahap, mulai dari pemahaman konsep dasar hingga penerapan praktis yang sistematis dan mudah dipahami.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'kebijakan_fiskal_moneter',
+    title: 'Kebijakan Fiskal dan Moneter',
+    category: 'Akademik',
+    tagline:
+        'Mempelajari kebijakan pemerintah dalam mengatur pajak, pengeluaran, dan jumlah uang yang beredar.',
+    instructor: 'Roeang Belajar',
+    price: 70000,
+    rating: 4.0,
+    thumbnailAsset: 'assets/images/banner_fiskal.png',
+    whatYouWillLearn: [
+      'Kebijakan Ekonomi Hingga Bisa',
+      'Belajar Kebijakan Ekonomi',
+      'Belajar Fiskal Dan Moneter',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman ekonomi Anda secara mendalam bersama tutor ahli dari Eduosmo. Kursus privat ini dirancang untuk membantu Anda menguasai konsep dasar hingga penerapan kebijakan fiskal dan moneter, mulai dari pengertian, tujuan, hingga instrumen yang digunakan. Dapatkan bimbingan terstruktur untuk memperkuat pemahaman materi sekolah maupun persiapan ujian agar Anda dapat meraih prestasi terbaik!',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'geografi_sma_tka',
+    title: 'Materi Geografi SMA-TKA',
+    category: 'Akademik',
+    tagline:
+        'Mempelajari fenomena alam, lingkungan, dan interaksi manusia dengan ruang untuk persiapan TKA-SMA.',
+    instructor: 'Edcent',
+    price: 80000,
+    rating: 4.0,
+    thumbnailAsset: 'assets/images/banner_geografi.png',
+    whatYouWillLearn: [
+      'Geografi Hingga Bisa',
+      'Belajar Geografi',
+      'Belajar Geografi TKA',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman geografi Anda secara mendalam bersama tutor ahli dari Eduosmo. Kursus ini dirancang khusus untuk siswa SMA serta persiapan TKA SMA dengan pembahasan menyeluruh mengenai dasar-dasar pemetaan (kartografi), interpretasi citra penginderaan jauh, hingga analisis Sistem Informasi Geografi (SIG). Dapatkan bimbingan terstruktur untuk menguasai konsep dan tipe-tipe soal ujian demi meraih prestasi terbaik!',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
+  ),
+  const CourseModel(
+    id: 'termokimia',
+    title: 'Termokimia',
+    headerTitle: 'Termokimia-Materi Kelas 11',
+    category: 'Akademik',
+    tagline:
+        'Mempelajari perubahan kalor dalam reaksi kimia dan perubahan fisika.',
+    instructor: 'Edcent',
+    price: 90000,
+    rating: 5.0,
+    thumbnailAsset: 'assets/images/banner_termokimia.png',
+    whatYouWillLearn: [
+      'Termokimia Hingga Bisa',
+      'Belajar Termokima',
+      'Belajar matematika',
+    ],
+    includes: [
+      'Video Pendukung',
+      'File Materi',
+      'Akses Seumur Hidup',
+      'Sertifikat Penyelesaian',
+    ],
+    description:
+        'Tingkatkan pemahaman Kimia Anda pada materi Termokimia dengan bimbingan tutor ahli dari Edcent. Kursus ini dirancang khusus untuk siswa SMA Kelas 11 guna memahami perubahan kalor dalam reaksi kimia dan perubahan fisika secara mendalam. Mulai dari konsep reaksi eksoterm dan endoterm hingga perhitungan matematis persamaan termokimia, kami siap membantu Anda menguasai materi dengan mudah dan percaya diri.',
+    reviews: [
+      CourseReview(
+        userName: 'Kakashi Hatake',
+        rating: 5.0,
+        comment: 'Kursusnya Menarik.',
+      ),
+    ],
   ),
 ];
 
@@ -433,6 +712,15 @@ CourseModel findOrCreateCourse(Map<String, dynamic> item, String defaultCategory
     normalizedTitle = 'cara jitu membangun kebiasaan';
   } else if (normalizedTitle == 'belajar adobe ilustrasi dari nol') {
     normalizedTitle = 'belajar adobe ilustrator dari nol';
+  } else if (normalizedTitle == 'termodinamika-fisika sma') {
+    normalizedTitle = 'termodinamika';
+  } else if (normalizedTitle == 'termokimia-materi kelas 11') {
+    normalizedTitle = 'termokimia';
+  } else if (normalizedTitle == 'gerakan yoga untuk pemula') {
+    normalizedTitle = 'gerakan yoga pemula';
+  } else if (normalizedTitle == 'pemahaman bacaan & literasi kritis' ||
+      normalizedTitle == 'pemahaman bacaan dan menulis') {
+    normalizedTitle = 'pemahaman bacaan dan menulis utbk';
   }
 
   return allCourses.firstWhere(

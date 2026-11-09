@@ -156,7 +156,7 @@ class LifestyleCategoryScreen extends StatelessWidget {
       {
         'title': 'Gerakan Yoga Pemula',
         'author': 'BodyFit By Bagus',
-        'image': 'assets/images/thumb_yoga.png',
+        'image': 'assets/images/banner_yoga.png',
         'rating': 5,
         'price': 'Rp. 45.000',
       },

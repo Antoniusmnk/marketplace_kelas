@@ -13,6 +13,7 @@ class CourseReview {
 class CourseModel {
   final String id;
   final String title;
+  final String? headerTitle;
   final String category;
   final String tagline;
   final String instructor;
@@ -27,6 +28,7 @@ class CourseModel {
   const CourseModel({
     required this.id,
     required this.title,
+    this.headerTitle,
     required this.category,
     this.tagline = '',
     required this.instructor,
@@ -43,6 +45,8 @@ class CourseModel {
     this.description = '',
     this.reviews = const [],
   });
+
+  String get displayHeaderTitle => headerTitle ?? title;
 
   // Format harga ke Rupiah: e.g. 30000 -> "Rp. 30.000"
   String get formattedPrice {
