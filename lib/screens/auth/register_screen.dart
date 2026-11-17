@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../widgets/auth_dialogs.dart';
 import '../../widgets/nexa_logo.dart';
 import 'loading_screen.dart';
 import 'login_screen.dart';
@@ -34,15 +35,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final confirmPass = _confirmPasswordController.text;
 
     if (email.isEmpty || pass.isEmpty || confirmPass.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Harap lengkapi semua kolom pendaftaran.')),
-      );
+      AuthDialogs.showValidationError(context);
       return;
     }
 
     if (pass != confirmPass) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Konfirmasi kata sandi tidak cocok.')),
+        const SnackBar(
+          content: Text(
+            'Konfirmasi kata sandi tidak cocok.',
+            style: TextStyle(fontFamily: 'Poppins'),
+          ),
+        ),
       );
       return;
     }
@@ -51,7 +55,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) => const LoadingScreen(),
+        builder: (_) => const LoadingScreen(
+          duration: Duration(milliseconds: 2500),
+        ),
       ),
     );
   }
@@ -101,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           letterSpacing: -0.2,
+                          fontFamily: 'Poppins',
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -119,160 +126,167 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
                           child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Sub-heading
-                    const Text(
-                      'Buat akun untuk lanjut belajar',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF333333),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Input Field 1: G-mail
-                    _buildInputField(
-                      label: 'G-mail',
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      hintText: 'contoh@gmail.com',
-                    ),
-                    const SizedBox(height: 14),
-
-                    // Input Field 2: Kata Sandi
-                    _buildInputField(
-                      label: 'Kata Sandi',
-                      controller: _passwordController,
-                      obscureText: _obscurePassword,
-                      isPassword: true,
-                      onToggleVisibility: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 14),
-
-                    // Input Field 3: Konfirmasi Kata Sandi
-                    _buildInputField(
-                      label: 'Konfirmasi Kata Sandi',
-                      controller: _confirmPasswordController,
-                      obscureText: _obscureConfirmPassword,
-                      isPassword: true,
-                      onToggleVisibility: () {
-                        setState(() {
-                          _obscureConfirmPassword = !_obscureConfirmPassword;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 26),
-
-                    // Tombol Daftar
-                    SizedBox(
-                      height: 48,
-                      child: ElevatedButton(
-                        onPressed: _handleRegister,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          foregroundColor: Colors.white,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
-                        child: const Text(
-                          'Daftar',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 22),
-
-                    // Daftar dengan teks
-                    const Text(
-                      'Daftar dengan:',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF333333),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 12),
-
-                    // Tombol Sosial Media (Google & Facebook)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        _buildSocialButton(
-                          imagePath: 'assets/images/icon_social_google.png',
-                          onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Daftar dengan Google')),
-                            );
-                          },
-                        ),
-                        const SizedBox(width: 16),
-                        _buildSocialButton(
-                          imagePath: 'assets/images/icon_social_fb.png',
-                          onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Daftar dengan Facebook')),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 36),
-
-                    // Link Masuk
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Sudah punya akun? ',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xFF333333),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const LoginScreen(),
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              // Sub-heading
+                              const Text(
+                                'Buat akun untuk lanjut belajar',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF333333),
+                                  fontFamily: 'Poppins',
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                            );
-                          },
-                          child: const Text(
-                            'Masuk',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor,
-                            ),
+                              const SizedBox(height: 20),
+
+                              // Input Field 1: G-mail
+                              _buildInputField(
+                                label: 'G-mail',
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                hintText: 'contoh@gmail.com',
+                              ),
+                              const SizedBox(height: 14),
+
+                              // Input Field 2: Kata Sandi
+                              _buildInputField(
+                                label: 'Kata Sandi',
+                                controller: _passwordController,
+                                obscureText: _obscurePassword,
+                                isPassword: true,
+                                onToggleVisibility: () {
+                                  setState(() {
+                                    _obscurePassword = !_obscurePassword;
+                                  });
+                                },
+                              ),
+                              const SizedBox(height: 14),
+
+                              // Input Field 3: Konfirmasi Kata Sandi
+                              _buildInputField(
+                                label: 'Konfirmasi Kata Sandi',
+                                controller: _confirmPasswordController,
+                                obscureText: _obscureConfirmPassword,
+                                isPassword: true,
+                                onToggleVisibility: () {
+                                  setState(() {
+                                    _obscureConfirmPassword = !_obscureConfirmPassword;
+                                  });
+                                },
+                              ),
+                              const SizedBox(height: 26),
+
+                              // Tombol Daftar
+                              SizedBox(
+                                height: 48,
+                                child: ElevatedButton(
+                                  onPressed: _handleRegister,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: primaryColor,
+                                    foregroundColor: Colors.white,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Daftar',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 22),
+
+                              // Daftar dengan teks
+                              const Text(
+                                'Daftar dengan:',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF333333),
+                                  fontFamily: 'Poppins',
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 12),
+
+                              // Tombol Sosial Media (Google & Facebook)
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _buildSocialButton(
+                                    imagePath: 'assets/images/icon_social_google.png',
+                                    onTap: () {
+                                      AuthDialogs.showSocialLogin(
+                                        context: context,
+                                        imageAsset: 'assets/images/popup_login_google.png',
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(width: 16),
+                                  _buildSocialButton(
+                                    imagePath: 'assets/images/icon_social_fb.png',
+                                    onTap: () {
+                                      AuthDialogs.showSocialLogin(
+                                        context: context,
+                                        imageAsset: 'assets/images/popup_login_facebook.png',
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 36),
+
+                              // Link Masuk
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Sudah punya akun? ',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Color(0xFF333333),
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => const LoginScreen(),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text(
+                                      'Masuk',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: primaryColor,
+                                        fontFamily: 'Poppins',
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-},
+            );
+          },
         ),
       ),
     );
@@ -296,6 +310,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             fontSize: 13,
             color: Color(0xFF757575),
             fontWeight: FontWeight.w500,
+            fontFamily: 'Poppins',
           ),
         ),
         const SizedBox(height: 6),
@@ -311,10 +326,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             style: const TextStyle(
               fontSize: 14,
               color: Colors.black87,
+              fontFamily: 'Poppins',
             ),
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: const TextStyle(color: Colors.black26, fontSize: 13),
+              hintStyle: const TextStyle(
+                color: Colors.black26,
+                fontSize: 13,
+                fontFamily: 'Poppins',
+              ),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,

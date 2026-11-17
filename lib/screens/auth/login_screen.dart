@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../widgets/auth_dialogs.dart';
 import '../../widgets/nexa_logo.dart';
 import 'loading_screen.dart';
 import 'register_screen.dart';
@@ -28,16 +29,16 @@ class _LoginScreenState extends State<LoginScreen> {
     final pass = _passwordController.text;
 
     if (email.isEmpty || pass.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Harap masukkan email dan kata sandi.')),
-      );
+      AuthDialogs.showValidationError(context);
       return;
     }
 
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) => const LoadingScreen(),
+        builder: (_) => const LoadingScreen(
+          duration: Duration(milliseconds: 2500),
+        ),
       ),
     );
   }
@@ -187,9 +188,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _buildSocialButton(
                                     imagePath: 'assets/images/icon_social_google.png',
                                     onTap: () {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text('Masuk dengan Google')),
+                                      AuthDialogs.showSocialLogin(
+                                        context: context,
+                                        imageAsset: 'assets/images/popup_login_google.png',
                                       );
                                     },
                                   ),
@@ -197,9 +198,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _buildSocialButton(
                                     imagePath: 'assets/images/icon_social_fb.png',
                                     onTap: () {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text('Masuk dengan Facebook')),
+                                      AuthDialogs.showSocialLogin(
+                                        context: context,
+                                        imageAsset: 'assets/images/popup_login_facebook.png',
                                       );
                                     },
                                   ),
@@ -298,17 +299,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 vertical: 12,
               ),
               suffixIcon: isPassword
-                  ? IconButton(
-                      icon: Icon(
-                        obscureText
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined,
-                        color: Colors.black45,
-                        size: 20,
-                      ),
-                      onPressed: onToggleVisibility,
-                    )
-                  : null,
+                ? IconButton(
+                    icon: Icon(
+                      obscureText
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      color: Colors.black45,
+                      size: 20,
+                    ),
+                    onPressed: onToggleVisibility,
+                  )
+                : null,
             ),
           ),
         ),
