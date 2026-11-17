@@ -30,7 +30,7 @@ class AuthDialogs {
           ),
         );
       },
-      pageBuilder: (dialogContext, _, __) {
+      pageBuilder: (dialogContext, _, _) {
         return Center(
           child: Material(
             color: Colors.transparent,
@@ -98,7 +98,7 @@ class AuthDialogs {
           ),
         );
       },
-      pageBuilder: (dialogContext, _, __) {
+      pageBuilder: (dialogContext, _, _) {
         return Center(
           child: Material(
             color: Colors.transparent,
