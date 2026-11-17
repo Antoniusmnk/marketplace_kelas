@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../data/courses_data.dart';
+import '../courses/course_detail_screen.dart';
 
 class PurchaseScreen extends StatelessWidget {
   const PurchaseScreen({super.key});
@@ -16,10 +18,22 @@ class PurchaseScreen extends StatelessWidget {
       ),
     );
 
-    final banners = [
-      'assets/images/banner_kursus_matematika.png',
-      'assets/images/banner_kursus_kimia.png',
-      'assets/images/banner_kursus_inggris.png',
+    final popularBanners = [
+      {
+        'title': 'Privat Matematika Profesional',
+        'image': 'assets/images/banner_kursus_matematika.png',
+        'id': 'matematika_profesional',
+      },
+      {
+        'title': 'Kimia Versi Mudah Paham',
+        'image': 'assets/images/banner_kursus_kimia.png',
+        'id': 'kimia_mudah_paham',
+      },
+      {
+        'title': 'Kursus Bahasa Inggris',
+        'image': 'assets/images/banner_kursus_inggris.png',
+        'id': 'kursus_bahasa_inggris',
+      },
     ];
 
     return Scaffold(
@@ -174,15 +188,29 @@ class PurchaseScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         scrollDirection: Axis.horizontal,
                         physics: const BouncingScrollPhysics(),
-                        itemCount: banners.length,
+                        itemCount: popularBanners.length,
                         separatorBuilder: (context, index) =>
                             const SizedBox(width: 14),
                         itemBuilder: (context, index) {
-                          return ClipRRect(
+                          final item = popularBanners[index];
+                          return InkWell(
+                            onTap: () {
+                              final course = getCourseById(item['id']!) ??
+                                  findOrCreateCourse(item, 'Akademik');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => CourseDetailScreen(course: course),
+                                ),
+                              );
+                            },
                             borderRadius: BorderRadius.circular(14),
-                            child: Image.asset(
-                              banners[index],
-                              fit: BoxFit.cover,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(14),
+                              child: Image.asset(
+                                item['image']!,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           );
                         },
