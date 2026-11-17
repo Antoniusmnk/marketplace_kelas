@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../data/courses_data.dart';
 import '../courses/course_detail_screen.dart';
+import 'purchase_history_screen.dart';
 
 class PurchaseScreen extends StatelessWidget {
   const PurchaseScreen({super.key});
@@ -69,9 +70,10 @@ class PurchaseScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: InkWell(
                         onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Membuka Riwayat Pembelian...'),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const PurchaseHistoryScreen(),
                             ),
                           );
                         },
