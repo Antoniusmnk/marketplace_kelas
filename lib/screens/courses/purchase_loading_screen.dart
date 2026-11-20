@@ -2,17 +2,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'purchase_success_screen.dart';
+import '../../data/courses_data.dart';
+import '../../models/course_model.dart';
 
 class PurchaseLoadingScreen extends StatefulWidget {
   final Duration duration;
   final Widget? nextScreen;
   final VoidCallback? onComplete;
+  final CourseModel? course;
 
   const PurchaseLoadingScreen({
     super.key,
     this.duration = const Duration(milliseconds: 2500),
     this.nextScreen,
     this.onComplete,
+    this.course,
   });
 
   @override
@@ -27,6 +31,10 @@ class _PurchaseLoadingScreenState extends State<PurchaseLoadingScreen>
   @override
   void initState() {
     super.initState();
+
+    if (widget.course != null) {
+      addPurchasedCourse(widget.course!);
+    }
 
     // Animasi putaran spinner
     _rotationController = AnimationController(

@@ -755,3 +755,13 @@ CourseModel findOrCreateCourse(Map<String, dynamic> item, String defaultCategory
     },
   );
 }
+
+// --- PURCHASE HISTORY STATE ---
+final List<CourseModel> purchasedCourses = [];
+
+void addPurchasedCourse(CourseModel course) {
+  if (!purchasedCourses.any((c) => c.id == course.id || c.title.toLowerCase().trim() == course.title.toLowerCase().trim())) {
+    purchasedCourses.insert(0, course);
+  }
+}
+

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../data/courses_data.dart';
 import '../../../models/course_model.dart';
 import '../purchase_loading_screen.dart';
 
@@ -165,11 +166,14 @@ class BuyNowBottomSheet extends StatelessWidget {
               height: 52,
               child: ElevatedButton(
                 onPressed: () {
+                  if (course != null) {
+                    addPurchasedCourse(course!);
+                  }
                   Navigator.pop(context); // Tutup bottom sheet
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const PurchaseLoadingScreen(),
+                      builder: (_) => PurchaseLoadingScreen(course: course),
                     ),
                   );
                 },
