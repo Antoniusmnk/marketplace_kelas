@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../data/courses_data.dart';
+import '../../models/course_model.dart';
+import '../courses/course_detail_screen.dart';
 
 class CourseScreen extends StatefulWidget {
   final int initialFilterIndex;
@@ -60,12 +63,7 @@ class _CourseScreenState extends State<CourseScreen> {
 
             // 3. Tampilan Konten Tengah (Berdasarkan filter tab yang aktif)
             Expanded(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: _buildBodyContent(),
-                ),
-              ),
+              child: _buildBodyContent(),
             ),
           ],
         ),
@@ -75,124 +73,291 @@ class _CourseScreenState extends State<CourseScreen> {
 
   // --- Konten Tengah Dinamis ---
   Widget _buildBodyContent() {
-    if (_selectedFilterIndex == 1) {
-      // Tampilan Tab 'Unduhan'
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/icon_download_cloud.png',
-            width: 64,
-            height: 64,
-            fit: BoxFit.contain,
+    if (_selectedFilterIndex == 0) {
+      // Tampilan Tab 'Semua': tampilkan kursus yang sudah dibeli jika ada
+      if (purchasedCourses.isNotEmpty) {
+        return _buildPurchasedCourseList();
+      }
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildCourseIllustration(),
+              const SizedBox(height: 28),
+              const Text(
+                'Apa yang mau dipelajari hari ini?',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                  fontFamily: 'Poppins',
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Kursusmu akan tersimpan disini.',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF666666),
+                  fontFamily: 'Poppins',
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+            ],
           ),
-          const SizedBox(height: 28),
-          const Text(
-            'Belum ada yang diunduh',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontFamily: 'Poppins',
-            ),
-            textAlign: TextAlign.center,
+        ),
+      );
+    } else if (_selectedFilterIndex == 1) {
+      // Tampilan Tab 'Unduhan': tampilkan kursus yang sudah dibeli jika ada
+      if (purchasedCourses.isNotEmpty) {
+        return _buildPurchasedCourseList();
+      }
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/icon_download_cloud.png',
+                width: 64,
+                height: 64,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 28),
+              const Text(
+                'Belum ada yang diunduh',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontFamily: 'Poppins',
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Kursus yang telah kamu unduh\nakan ada disini',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF666666),
+                  fontFamily: 'Poppins',
+                  height: 1.35,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+            ],
           ),
-          const SizedBox(height: 8),
-          const Text(
-            'Kursus yang telah kamu unduh\nakan ada disini',
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF666666),
-              fontFamily: 'Poppins',
-              height: 1.35,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 30),
-        ],
+        ),
       );
     } else if (_selectedFilterIndex == 2) {
       // Tampilan Tab 'Favorit'
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/icon_favorite_heart.png',
-            width: 54,
-            height: 54,
-            fit: BoxFit.contain,
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/icon_favorite_heart.png',
+                width: 54,
+                height: 54,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Belum ada kursus favorit',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF555555),
+                  fontFamily: 'Poppins',
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+            ],
           ),
-          const SizedBox(height: 24),
-          const Text(
-            'Belum ada kursus favorit',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF555555),
-              fontFamily: 'Poppins',
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 30),
-        ],
+        ),
       );
     } else if (_selectedFilterIndex == 3) {
       // Tampilan Tab 'Diarsipkan' / 'Arsip'
-      return const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Tidak ada arsip',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF555555),
-              fontFamily: 'Poppins',
-            ),
-            textAlign: TextAlign.center,
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Tidak ada arsip',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF555555),
+                  fontFamily: 'Poppins',
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 30),
+            ],
           ),
-          SizedBox(height: 30),
-        ],
+        ),
       );
     }
 
-    // Default: Tampilan Tab 'Semua' (dan filter lainnya)
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // Komposisi Ikon (Buku, List, Play)
-        _buildCourseIllustration(),
+    return const SizedBox.shrink();
+  }
 
-        const SizedBox(height: 28),
+  // --- Daftar Kursus yang Telah Dibeli (Tab Semua & Unduhan) ---
+  Widget _buildPurchasedCourseList() {
+    return ListView.separated(
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      itemCount: purchasedCourses.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 14),
+      itemBuilder: (context, index) {
+        final course = purchasedCourses[index];
+        return _buildCourseCard(course);
+      },
+    );
+  }
 
-        // Teks Judul
-        const Text(
-          'Apa yang mau dipelajari hari ini?',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-            fontFamily: 'Poppins',
+  // --- Kartu Kursus yang Telah Dibeli ---
+  Widget _buildCourseCard(CourseModel course) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CourseDetailScreen(
+              course: course,
+              isPurchased: true,
+            ),
           ),
-          textAlign: TextAlign.center,
-        ),
-
-        const SizedBox(height: 8),
-
-        // Teks Subjudul
-        const Text(
-          'Kursusmu akan tersimpan disini.',
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFF666666),
-            fontFamily: 'Poppins',
+        );
+      },
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: const Color(0xFFE5E5E5),
+            width: 1,
           ),
-          textAlign: TextAlign.center,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
-        const SizedBox(height: 30),
-      ],
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Thumbnail Kursus
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                course.thumbnailAsset,
+                width: 88,
+                height: 64,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  width: 88,
+                  height: 64,
+                  color: Colors.grey.shade200,
+                  child: const Icon(
+                    Icons.play_circle_outline,
+                    color: primaryColor,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+
+            // Informasi Kursus
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    course.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    course.instructor,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      color: Color(0xFF666666),
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        course.category,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                          color: primaryColor,
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE8F5E9),
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                            color: const Color(0xFF81C784),
+                            width: 0.8,
+                          ),
+                        ),
+                        child: const Text(
+                          'Sudah Dibeli',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF2E7D32),
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

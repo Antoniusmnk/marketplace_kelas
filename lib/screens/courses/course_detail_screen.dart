@@ -1,15 +1,22 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../data/courses_data.dart';
 import '../../models/course_model.dart';
+import '../main/chat_detail_screen.dart';
 import 'widgets/cart_success_bottom_sheet.dart';
 import 'widgets/buy_now_bottom_sheet.dart';
 import '../main/home_screen.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   final CourseModel course;
+  final bool isPurchased;
 
-  const CourseDetailScreen({super.key, required this.course});
+  const CourseDetailScreen({
+    super.key,
+    required this.course,
+    this.isPurchased = false,
+  });
 
   @override
   State<CourseDetailScreen> createState() => _CourseDetailScreenState();
@@ -18,6 +25,9 @@ class CourseDetailScreen extends StatefulWidget {
 class _CourseDetailScreenState extends State<CourseDetailScreen> {
   static const Color primaryColor = Color(0xFF800E13);
   bool _isFavorite = false;
+
+  bool get _isPurchased =>
+      widget.isPurchased || isCoursePurchased(widget.course.id, widget.course.title);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +113,26 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                             style: const TextStyle(
                               color: primaryColor,
                               fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                              decorationColor: primaryColor,
                             ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                addChatInstructor(name: widget.course.instructor);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => ChatDetailScreen(
+                                      instructorName: widget.course.instructor,
+                                      avatarAsset: getInstructorAvatar(widget.course.instructor),
+                                      initialInstructorMessage:
+                                          'Halo, ada yang bisa saya bantu terkait kursus ${widget.course.title}?',
+                                      initialUserMessage:
+                                          'Halo kak, saya ingin bertanya tentang kursus ${widget.course.title}.',
+                                    ),
+                                  ),
+                                );
+                              },
                           ),
                         ],
                       ),
@@ -111,8 +140,10 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     const SizedBox(height: 18),
 
                     // E. 3 Tombol Aksi (Beli Sekarang, Keranjang, Wishlist)
-                    _buildActionButtons(),
-                    const SizedBox(height: 24),
+                    if (!_isPurchased) ...[
+                      _buildActionButtons(),
+                      const SizedBox(height: 24),
+                    ],
 
                     // F. Section: Yang akan Dipelajari
                     if (widget.course.whatYouWillLearn.isNotEmpty) ...[

@@ -779,3 +779,57 @@ void removeFromCart(CourseModel course) {
   cartCourses.removeWhere((c) => c.id == course.id || c.title.toLowerCase().trim() == course.title.toLowerCase().trim());
 }
 
+bool isCoursePurchased(String courseId, [String? courseTitle]) {
+  return purchasedCourses.any((c) =>
+      c.id == courseId ||
+      (courseTitle != null && c.title.toLowerCase().trim() == courseTitle.toLowerCase().trim()));
+}
+
+// --- CHAT INSTRUCTORS STATE ---
+final List<Map<String, String>> chatInstructors = [
+  {
+    'name': 'Riko Abu Alfatih',
+    'message': 'Halo, ada yang mau ditanya?',
+    'avatar': 'assets/images/avatar_riko.jpg',
+    'user_reply': 'Apa saja yang ada dalam Kursus?',
+  },
+  {
+    'name': 'Maudy Ayunda',
+    'message': 'Jangan ragu untuk belajar!',
+    'avatar': 'assets/images/avatar_maudy.jpg',
+    'user_reply': 'Halo kak Maudy, bagaimana tips konsisten belajar?',
+  },
+  {
+    'name': 'GreatMind',
+    'message': 'Investasi leher keatas itu penting lo',
+    'avatar': 'assets/images/avatar_greatmind.jpg',
+    'user_reply': 'Halo kak, apa saja yang akan dipelajari di filosofi anti cemas?',
+  },
+];
+
+String getInstructorAvatar(String name) {
+  final n = name.toLowerCase();
+  if (n.contains('riko')) return 'assets/images/avatar_riko.jpg';
+  if (n.contains('maudy')) return 'assets/images/avatar_maudy.jpg';
+  if (n.contains('greatmind')) return 'assets/images/avatar_greatmind.jpg';
+  return 'assets/images/avatar_riko.jpg';
+}
+
+void addChatInstructor({
+  required String name,
+  String? avatar,
+  String? message,
+  String? userReply,
+}) {
+  final cleanName = name.replaceFirst('Dibuat oleh ', '').trim();
+  if (!chatInstructors.any((i) => i['name']!.toLowerCase() == cleanName.toLowerCase())) {
+    chatInstructors.add({
+      'name': cleanName,
+      'message': message ?? 'Halo, ada yang bisa saya bantu terkait kursus ini?',
+      'avatar': avatar ?? getInstructorAvatar(cleanName),
+      'user_reply': userReply ?? 'Halo kak, saya ingin bertanya tentang kursus ini.',
+    });
+  }
+}
+
+

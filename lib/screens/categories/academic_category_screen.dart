@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../data/courses_data.dart';
 import '../courses/course_detail_screen.dart';
+import '../main/chat_detail_screen.dart';
 
 class AcademicCategoryScreen extends StatelessWidget {
   final Function(int)? onNavigateTab;
@@ -343,16 +344,33 @@ class AcademicCategoryScreen extends StatelessWidget {
           const SizedBox(height: 2),
 
           // Author
-          Text(
-            item['author'] as String,
-            style: const TextStyle(
-              fontSize: 9.5,
-              fontWeight: FontWeight.w500,
-              color: primaryColor,
-              fontFamily: 'Poppins',
+          InkWell(
+            onTap: () {
+              final authorName = (item['author'] as String).replaceFirst('Dibuat oleh ', '').trim();
+              addChatInstructor(name: authorName);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ChatDetailScreen(
+                    instructorName: authorName,
+                    avatarAsset: getInstructorAvatar(authorName),
+                    initialInstructorMessage: 'Halo, ada yang bisa saya bantu terkait kursus ${item['title']}?',
+                    initialUserMessage: 'Halo kak, saya ingin bertanya tentang materi ini.',
+                  ),
+                ),
+              );
+            },
+            child: Text(
+              item['author'] as String,
+              style: const TextStyle(
+                fontSize: 9.5,
+                fontWeight: FontWeight.w500,
+                color: primaryColor,
+                fontFamily: 'Poppins',
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
