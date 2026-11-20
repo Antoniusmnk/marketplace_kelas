@@ -763,5 +763,19 @@ void addPurchasedCourse(CourseModel course) {
   if (!purchasedCourses.any((c) => c.id == course.id || c.title.toLowerCase().trim() == course.title.toLowerCase().trim())) {
     purchasedCourses.insert(0, course);
   }
+  removeFromCart(course);
+}
+
+// --- CART STATE ---
+final List<CourseModel> cartCourses = [];
+
+void addToCart(CourseModel course) {
+  if (!cartCourses.any((c) => c.id == course.id || c.title.toLowerCase().trim() == course.title.toLowerCase().trim())) {
+    cartCourses.add(course);
+  }
+}
+
+void removeFromCart(CourseModel course) {
+  cartCourses.removeWhere((c) => c.id == course.id || c.title.toLowerCase().trim() == course.title.toLowerCase().trim());
 }
 

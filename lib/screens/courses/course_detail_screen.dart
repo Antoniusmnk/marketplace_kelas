@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../data/courses_data.dart';
 import '../../models/course_model.dart';
 import 'widgets/cart_success_bottom_sheet.dart';
 import 'widgets/buy_now_bottom_sheet.dart';
@@ -276,6 +277,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             height: 44,
             child: OutlinedButton(
               onPressed: () {
+                addToCart(widget.course);
                 CartSuccessBottomSheet.show(context);
               },
               style: OutlinedButton.styleFrom(
